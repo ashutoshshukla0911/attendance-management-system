@@ -2,9 +2,71 @@
 <html>
 <head>
   <title>Dashboard</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;  /* horizontal center */
+      align-items: center;      /* vertical center */
+      background-color: #f0f0f0; /* Consistent background */
+    }
+    .dashboard-container { /* Similar to .welcome-container and form styling */
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px; /* Adjust as needed */
+      text-align: center;
+    }
+    .dashboard-container h2 {
+      font-size: 22px; /* Adjusted for a dashboard greeting */
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 30px; /* Space before the action button */
+    }
+    .action-button { /* Re-usable button style */
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #4CAF50; /* Green button */
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none; /* Remove underline from link */
+      transition: background-color 0.3s ease;
+      margin-top: 10px; /* Spacing for buttons */
+    }
+    .action-button:hover {
+      background-color: #45a049; /* Darker green on hover */
+    }
+    /* You might want a different color for other actions, like logout */
+    .logout-button {
+      background-color: #f44336; /* Red for logout, for example */
+    }
+    .logout-button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
 </head>
 <body>
-  <h2>Welcome, [User]</h2>
-  <a href="attendance.html">Mark Attendance</a>
+  <div class="dashboard-container">
+    <h2>Welcome, <span id="username-display">[User]</span>!</h2>
+    <a href="attendance.html" class="action-button">Mark Attendance</a>
+    </div>
+
+  <script>
+    // Note: The "[User]" part in "Welcome, [User]!" is a placeholder.
+    // In a real application, you would dynamically insert the logged-in user's name here.
+    // This might be done by your backend system when it generates this page,
+    // or by JavaScript if the username is fetched after the page loads.
+    // For example:
+    // const actualUserName = "Alice"; // This would come from your login system
+    // document.getElementById('username-display').textContent = actualUserName;
+  </script>
 </body>
 </html>
