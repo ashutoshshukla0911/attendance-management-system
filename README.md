@@ -34,7 +34,7 @@ MySQL (future backend storage)
 
 ✔️ Create attendance reports and download options
 
-# 🔗 Live Frontend Demo
+🔗 Live Frontend Demo
 https://ashutoshshukla0911.github.io/attendance-management-system/
 
 📂 Project Status
