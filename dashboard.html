@@ -10,43 +10,43 @@
     }
     body {
       display: flex;
-      justify-content: center;  /* horizontal center */
-      align-items: center;      /* vertical center */
-      background-color: #f0f0f0; /* Consistent background */
+      justify-content: center;  
+      align-items: center;      
+      background-color: #f0f0f0; 
     }
-    .dashboard-container { /* Container for dashboard content */
+    .dashboard-container {
       background: white;
       padding: 40px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 400px; /* Adjust as needed */
+      width: 400px; 
       text-align: center;
     }
     .dashboard-container h2 {
-      font-size: 22px; /* Adjusted for a dashboard greeting */
+      font-size: 22px; 
       color: #333;
       margin-top: 0;
-      margin-bottom: 30px; /* Space before the action button */
+      margin-bottom: 30px; 
     }
-    .action-button { /* Re-usable button style for links */
+    .action-button {
       display: inline-block;
       padding: 12px 25px;
-      background-color: #4CAF50; /* Green button */
+      background-color: #4CAF50; 
       border: none;
       color: white;
       font-size: 16px;
       border-radius: 4px;
       cursor: pointer;
-      text-decoration: none; /* Remove underline from link */
+      text-decoration: none; 
       transition: background-color 0.3s ease;
-      margin-top: 10px; /* Spacing for buttons */
+      margin-top: 10px;
     }
     .action-button:hover {
-      background-color: #45a049; /* Darker green on hover */
+      background-color: #45a049; 
     }
-    /* Example: Style for a logout button if you add one */
+    
     .logout-button {
-      background-color: #f44336; /* Red for logout */
+      background-color: #f44336;
     }
     .logout-button:hover {
       background-color: #d32f2f;
@@ -61,17 +61,5 @@
     
     </div>
 
-  <script>
-    // Note: The "[User]" part in "Welcome, [User]!" is a placeholder.
-    // In a real application, you would dynamically insert the logged-in user's name here.
-    // For a static site, this will remain "[User]" unless you use JavaScript 
-    // to change it based on some information (e.g., from URL parameters if using GET method, or local storage).
-    // Example (very basic, for demonstration if name was in URL like ?user=Alice):
-    // const params = new URLSearchParams(window.location.search);
-    // const userName = params.get('user');
-    // if (userName) {
-    //   document.getElementById('username-display').textContent = decodeURIComponent(userName);
-    // }
-  </script>
 </body>
 </html>
