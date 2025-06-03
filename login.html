@@ -2,14 +2,57 @@
 <html>
 <head>
   <title>Login</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;  /* horizontal center */
+      align-items: center;      /* vertical center */
+      background-color: #f0f0f0;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0 12px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-  <h2>Login</h2>
-  <form action="dashboard.html" method="GET">
-    <label>Username:</label><br>
-    <input type="text" name="username" required><br>
-    <label>Password:</label><br>
-    <input type="password" name="password" required><br><br>
+  <form action="dashboard.html" method="POST">
+    <h2 style="text-align:center;">Login</h2>
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" required autocomplete="username"><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required autocomplete="current-password"><br><br>
+
     <input type="submit" value="Login">
   </form>
 </body>
