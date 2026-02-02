@@ -1,35 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Attendance</title>
+  <title>Admin Dashboard</title>
 </head>
 <body>
 
-<h2>Mark Attendance</h2>
-<button onclick="markAttendance()">Mark Attendance</button>
-<br><br>
-<a href="dashboard.html">Go to Admin Dashboard</a>
+<h2>Admin Dashboard – Attendance Status</h2>
+
+<table border="1">
+  <tr>
+    <th>User</th>
+    <th>Date</th>
+    <th>Status</th>
+  </tr>
+  <tbody id="attendanceTable"></tbody>
+</table>
+
+<br>
+<a href="attendance.html">Back to Attendance</a>
 
 <script>
-function markAttendance() {
-  const user = localStorage.getItem("loggedInUser");
-  if (!user) {
-    alert("Login first");
-    return;
-  }
+const today = new Date().toISOString().split("T")[0];
+const data = JSON.parse(localStorage.getItem("attendance")) || {};
+const table = document.getElementById("attendanceTable");
 
-  const today = new Date().toISOString().split("T")[0];
-  let data = JSON.parse(localStorage.getItem("attendance")) || {};
-
-  if (!data[today]) data[today] = {};
-
-  if (data[today][user]) {
-    alert("Attendance already marked");
-  } else {
-    data[today][user] = "Present";
-    localStorage.setItem("attendance", JSON.stringify(data));
-    alert("Attendance marked successfully");
-  }
+// get all users who marked attendance today
+if (data[today]) {
+  Object.keys(data[today]).forEach(user => {
+    table.innerHTML += `
+      <tr>
+        <td>${user}</td>
+        <td>${today}</td>
+        <td style="color:green">Present</td>
+      </tr>
+    `;
+  });
+} else {
+  table.innerHTML = `
+    <tr>
+      <td colspan="3" style="color:red">No attendance marked today</td>
+    </tr>
+  `;
 }
 </script>
 
