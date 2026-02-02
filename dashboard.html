@@ -24,7 +24,6 @@ const today = new Date().toISOString().split("T")[0];
 const data = JSON.parse(localStorage.getItem("attendance")) || {};
 const table = document.getElementById("attendanceTable");
 
-// get all users who marked attendance today
 if (data[today]) {
   Object.keys(data[today]).forEach(user => {
     table.innerHTML += `
@@ -38,7 +37,9 @@ if (data[today]) {
 } else {
   table.innerHTML = `
     <tr>
-      <td colspan="3" style="color:red">No attendance marked today</td>
+      <td colspan="3" style="color:red">
+        No attendance marked today
+      </td>
     </tr>
   `;
 }
