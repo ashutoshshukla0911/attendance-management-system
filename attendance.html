@@ -1,81 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Mark Attendance</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #f0f0f0;
-      padding: 20px; /* Ensures some space if the form is viewed on small screens */
-    }
-    .attendance-form-container { /* Container for the attendance form */
-      background: white;
-      padding: 30px 40px; /* More horizontal padding */
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 380px; /* Adjusted width to comfortably fit content */
-    }
-    .attendance-form-container h2 {
-      text-align: center;
-      font-size: 22px;
-      color: #333;
-      margin-top: 0;
-      margin-bottom: 25px;
-    }
-    .attendance-form-container label {
-      display: block; /* Labels on their own line */
-      margin-bottom: 8px; /* Space after label */
-      font-weight: bold;
-      color: #555; /* Slightly softer than black */
-    }
-    .attendance-form-container input[type="text"],
-    .attendance-form-container select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px; /* Space after input/select field */
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    .attendance-form-container input[type="submit"] {
-      width: 100%;
-      padding: 12px;
-      background-color: #4CAF50; /* Consistent green button */
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .attendance-form-container input[type="submit"]:hover {
-      background-color: #45a049; /* Darker green on hover */
-    }
-  </style>
-</head>
-<body>
-  <div class="attendance-form-container">
-    <h2>Mark Attendance</h2>
-    <form action="#" method="POST">
-      <label for="studentName">Student Name:</label>
-      <input type="text" id="studentName" name="name" required>
+<script>
+function markAttendance() {
+    const user = localStorage.getItem("loggedInUser");
+    const today = new Date().toISOString().split("T")[0];
 
-      <label for="status">Status:</label>
-      <select id="status" name="status">
-        <option value="Present">Present</option>
-        <option value="Absent">Absent</option>
-      </select>
+    if (!user) {
+        alert("Please login first");
+        return;
+    }
 
-      <input type="submit" value="Submit">
-    </form>
-  </div>
-</body>
-</html>
+    let attendanceData = JSON.parse(localStorage.getItem("attendance")) || {};
+
+    if (!attendanceData[today]) {
+        attendanceData[today] = {};
+    }
+
+    if (attendanceData[today][user]) {
+        alert("Attendance already marked for today");
+    } else {
+        attendanceData[today][user] = "Present";
+        localStorage.setItem("attendance", JSON.stringify(attendanceData));
+        alert("Attendance marked successfully");
+    }
+}
+</script>
