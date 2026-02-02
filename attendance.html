@@ -6,16 +6,19 @@
 <body>
 
 <h2>Mark Attendance</h2>
+
 <button onclick="markAttendance()">Mark Attendance</button>
 <br><br>
 <a href="dashboard.html">Go to Admin Dashboard</a>
 
 <script>
 function markAttendance() {
-  const user = localStorage.getItem("loggedInUser");
+  let user = localStorage.getItem("loggedInUser");
+
   if (!user) {
-    alert("Login first");
-    return;
+    user = prompt("Enter your name:");
+    if (!user) return;
+    localStorage.setItem("loggedInUser", user);
   }
 
   const today = new Date().toISOString().split("T")[0];
