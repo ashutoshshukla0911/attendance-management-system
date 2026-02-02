@@ -1,65 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    body {
-      display: flex;
-      justify-content: center;  
-      align-items: center;      
-      background-color: #f0f0f0; 
-    }
-    .dashboard-container {
-      background: white;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 400px; 
-      text-align: center;
-    }
-    .dashboard-container h2 {
-      font-size: 22px; 
-      color: #333;
-      margin-top: 0;
-      margin-bottom: 30px; 
-    }
-    .action-button {
-      display: inline-block;
-      padding: 12px 25px;
-      background-color: #4CAF50; 
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      text-decoration: none; 
-      transition: background-color 0.3s ease;
-      margin-top: 10px;
-    }
-    .action-button:hover {
-      background-color: #45a049; 
-    }
-    
-    .logout-button {
-      background-color: #f44336;
-    }
-    .logout-button:hover {
-      background-color: #d32f2f;
-    }
-  </style>
-</head>
-<body>
-  <div class="dashboard-container">
-    <h2>Welcome, [User]</h2>
-    
-    <a href="attendance.html" class="action-button">Mark Attendance</a>
-    
-    </div>
+<table border="1">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody id="attendanceTable"></tbody>
+</table>
 
-</body>
-</html>
+<script>
+const attendanceData = JSON.parse(localStorage.getItem("attendance")) || {};
+const today = new Date().toISOString().split("T")[0];
+const users = ["Ashutosh", "Rahul", "Aman"]; // demo users
+
+const table = document.getElementById("attendanceTable");
+
+users.forEach(user => {
+    const status = attendanceData[today]?.[user] || "Not Marked";
+
+    table.innerHTML += `
+        <tr>
+            <td>${user}</td>
+            <td>${today}</td>
+            <td style="color:${status === "Present" ? "green" : "red"}">
+                ${status}
+            </td>
+        </tr>
+    `;
+});
+</script>
