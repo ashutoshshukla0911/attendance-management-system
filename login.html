@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login</title>
-</head>
-<body>
+  <meta charset="UTF-8">
+  <title>Login | Attendance System</title>
 
-<h2>Login</h2>
-<input id="username" placeholder="Enter username">
-<button onclick="login()">Login</button>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
 
-<script>
-function login() {
-  const username = document.getElementById("username").value;
-  if (!username) {
-    alert("Enter username");
-    return;
-  }
-  localStorage.setItem("loggedInUser", username);
-  window.location.href = "attendance.html";
-}
-</script>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
 
-</body>
-</html>
+    .login-container {
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
