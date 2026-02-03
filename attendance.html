@@ -1,40 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Attendance</title>
+  <meta charset="UTF-8">
+  <title>Attendance | Attendance System</title>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    .attendance-container {
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px;
+      text-align: center;
+    }
+
+    .attendance-container h2 {
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .action-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    .action-button:hover {
+      background-color: #45a049;
+    }
+
+    .dashboard-link {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #4CAF50;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .dashboard-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
+
 <body>
 
-<h2>Mark Attendance</h2>
+  <div class="attendance-container">
+    <h2>Mark Attendance</h2>
 
-<button onclick="markAttendance()">Mark Attendance</button>
-<br><br>
-<a href="dashboard.html">Go to Admin Dashboard</a>
+    <button class="action-button" onclick="markAttendance()">
+      Mark Attendance
+    </button>
 
-<script>
-function markAttendance() {
-  let user = localStorage.getItem("loggedInUser");
+    <a href="dashboard.html" class="dashboard-link">
+      Go to Admin Dashboard
+    </a>
+  </div>
 
-  if (!user) {
-    user = prompt("Enter your name:");
-    if (!user) return;
-    localStorage.setItem("loggedInUser", user);
-  }
+  <script>
+    function markAttendance() {
+      let user = localStorage.getItem("loggedInUser");
 
-  const today = new Date().toISOString().split("T")[0];
-  let data = JSON.parse(localStorage.getItem("attendance")) || {};
+      if (!user) {
+        user = prompt("Enter your name:");
+        if (!user) return;
+        localStorage.setItem("loggedInUser", user);
+      }
 
-  if (!data[today]) data[today] = {};
+      const today = new Date().toISOString().split("T")[0];
+      let data = JSON.parse(localStorage.getItem("attendance")) || {};
 
-  if (data[today][user]) {
-    alert("Attendance already marked");
-  } else {
-    data[today][user] = "Present";
-    localStorage.setItem("attendance", JSON.stringify(data));
-    alert("Attendance marked successfully");
-  }
-}
-</script>
+      if (!data[today]) data[today] = {};
+
+      if (data[today][user]) {
+        alert("Attendance already marked");
+      } else {
+        data[today][user] = "Present";
+        localStorage.setItem("attendance", JSON.stringify(data));
+        alert("Attendance marked successfully");
+      }
+    }
+  </script>
 
 </body>
 </html>
