@@ -27,8 +27,7 @@
       text-align: center;
     }
 
-    .dashboard-container h2 {
-      margin-top: 0;
+    h2 {
       margin-bottom: 25px;
       color: #333;
     }
@@ -43,30 +42,30 @@
       padding: 12px;
       border-bottom: 1px solid #ddd;
       text-align: center;
-      font-size: 14px;
     }
 
     th {
       background-color: #f5f5f5;
-      color: #333;
     }
 
-    .status-present {
+    .present {
       color: #4CAF50;
+      font-weight: bold;
+    }
+
+    .absent {
+      color: #f44336;
       font-weight: bold;
     }
 
     .no-data {
       color: red;
       font-weight: bold;
-      padding: 15px;
     }
 
     .back-link {
-      display: inline-block;
       text-decoration: none;
       color: #4CAF50;
-      font-size: 14px;
       font-weight: bold;
     }
 
@@ -92,9 +91,7 @@
       <tbody id="attendanceTable"></tbody>
     </table>
 
-    <a href="attendance.html" class="back-link">
-      Back to Attendance
-    </a>
+    <a href="attendance.html" class="back-link">Back to Attendance</a>
   </div>
 
   <script>
@@ -104,20 +101,21 @@
 
     if (data[today]) {
       Object.keys(data[today]).forEach(user => {
+        const status = data[today][user]; // Present or Absent
+        const statusClass = status === "Present" ? "present" : "absent";
+
         table.innerHTML += `
           <tr>
             <td>${user}</td>
             <td>${today}</td>
-            <td class="status-present">Present</td>
+            <td class="${statusClass}">${status}</td>
           </tr>
         `;
       });
     } else {
       table.innerHTML = `
         <tr>
-          <td colspan="3" class="no-data">
-            No attendance marked today
-          </td>
+          <td colspan="3" class="no-data">No attendance marked today</td>
         </tr>
       `;
     }
