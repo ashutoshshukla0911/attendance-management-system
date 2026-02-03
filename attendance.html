@@ -33,10 +33,9 @@
       color: #333;
     }
 
-    .action-button {
+    .option-button {
       width: 100%;
       padding: 12px;
-      background-color: #4CAF50;
       border: none;
       color: white;
       font-size: 16px;
@@ -46,8 +45,20 @@
       margin-bottom: 15px;
     }
 
-    .action-button:hover {
+    .present {
+      background-color: #4CAF50;
+    }
+
+    .present:hover {
       background-color: #45a049;
+    }
+
+    .absent {
+      background-color: #f44336;
+    }
+
+    .absent:hover {
+      background-color: #e53935;
     }
 
     .dashboard-link {
@@ -70,8 +81,12 @@
   <div class="attendance-container">
     <h2>Mark Attendance</h2>
 
-    <button class="action-button" onclick="markAttendance()">
-      Mark Attendance
+    <button class="option-button present" onclick="markAttendance('Present')">
+      Mark Present
+    </button>
+
+    <button class="option-button absent" onclick="markAttendance('Absent')">
+      Mark Absent
     </button>
 
     <a href="dashboard.html" class="dashboard-link">
@@ -80,7 +95,7 @@
   </div>
 
   <script>
-    function markAttendance() {
+    function markAttendance(status) {
       let user = localStorage.getItem("loggedInUser");
 
       if (!user) {
@@ -95,11 +110,11 @@
       if (!data[today]) data[today] = {};
 
       if (data[today][user]) {
-        alert("Attendance already marked");
+        alert("Attendance already marked for today");
       } else {
-        data[today][user] = "Present";
+        data[today][user] = status;
         localStorage.setItem("attendance", JSON.stringify(data));
-        alert("Attendance marked successfully");
+        alert(`Attendance marked as ${status}`);
       }
     }
   </script>
