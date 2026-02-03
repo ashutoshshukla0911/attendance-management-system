@@ -27,23 +27,22 @@
       text-align: center;
     }
 
-    .login-container h2 {
-      margin-top: 0;
+    h2 {
       margin-bottom: 25px;
       color: #333;
     }
 
-    .login-container input {
+    input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 15px;
       box-sizing: border-box;
     }
 
-    .login-button {
+    button {
       width: 100%;
       padding: 12px;
       background-color: #4CAF50;
@@ -55,8 +54,24 @@
       transition: background-color 0.3s ease;
     }
 
-    .login-button:hover {
+    button:hover {
       background-color: #45a049;
+    }
+
+    .register-link {
+      margin-top: 15px;
+      display: block;
+      font-size: 14px;
+    }
+
+    .register-link a {
+      color: #4CAF50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -66,22 +81,51 @@
   <div class="login-container">
     <h2>Login</h2>
 
-    <input id="username" type="text" placeholder="Enter username">
+    <input id="username" type="text" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
 
-    <button class="login-button" onclick="login()">Login</button>
+    <button onclick="login()">Login</button>
+
+    <div class="register-link">
+      New user? <a href="register.html">Register here</a>
+    </div>
   </div>
 
   <script>
     function login() {
-      const username = document.getElementById("username").value.trim();
+      const u = document.getElementById("username").value.trim();
+      const p = document.getElementById("password").value.trim();
 
-      if (!username) {
-        alert("Please enter username");
+      if (!u || !p) {
+        alert("Please enter username and password");
         return;
       }
 
-      localStorage.setItem("loggedInUser", username);
-      window.location.href = "attendance.html";
+      // Get registered users
+      let users = JSON.parse(localStorage.getItem("users")) || {};
+
+      // Ensure admin account always exists
+      if (!users.admin) {
+        users.admin = { password: "admin123", role: "admin" };
+        localStorage.setItem("users", JSON.stringify(users));
+      }
+
+      // Validate login
+      if (!users[u] || users[u].password !== p) {
+        alert("Invalid username or password");
+        return;
+      }
+
+      // Save session
+      localStorage.setItem("loggedInUser", u);
+      localStorage.setItem("role", users[u].role);
+
+      // Redirect
+      if (users[u].role === "admin") {
+        window.location.href = "dashboard.html";
+      } else {
+        window.location.href = "attendance.html";
+      }
     }
   </script>
 
