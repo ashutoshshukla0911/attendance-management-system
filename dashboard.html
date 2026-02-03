@@ -1,49 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Dashboard</title>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | Attendance System</title>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    .dashboard-container {
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 700px;
+      text-align: center;
+    }
+
+    .dashboard-container h2 {
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .status-present {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+
+    .no-data {
+      color: red;
+      font-weight: bold;
+      padding: 15px;
+    }
+
+    .back-link {
+      display: inline-block;
+      text-decoration: none;
+      color: #4CAF50;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
+
 <body>
 
-<h2>Admin Dashboard – Attendance Status</h2>
+  <div class="dashboard-container">
+    <h2>Admin Dashboard – Attendance Status</h2>
 
-<table border="1">
-  <tr>
-    <th>User</th>
-    <th>Date</th>
-    <th>Status</th>
-  </tr>
-  <tbody id="attendanceTable"></tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="attendanceTable"></tbody>
+    </table>
 
-<br>
-<a href="attendance.html">Back to Attendance</a>
+    <a href="attendance.html" class="back-link">
+      Back to Attendance
+    </a>
+  </div>
 
-<script>
-const today = new Date().toISOString().split("T")[0];
-const data = JSON.parse(localStorage.getItem("attendance")) || {};
-const table = document.getElementById("attendanceTable");
+  <script>
+    const today = new Date().toISOString().split("T")[0];
+    const data = JSON.parse(localStorage.getItem("attendance")) || {};
+    const table = document.getElementById("attendanceTable");
 
-if (data[today]) {
-  Object.keys(data[today]).forEach(user => {
-    table.innerHTML += `
-      <tr>
-        <td>${user}</td>
-        <td>${today}</td>
-        <td style="color:green">Present</td>
-      </tr>
-    `;
-  });
-} else {
-  table.innerHTML = `
-    <tr>
-      <td colspan="3" style="color:red">
-        No attendance marked today
-      </td>
-    </tr>
-  `;
-}
-</script>
+    if (data[today]) {
+      Object.keys(data[today]).forEach(user => {
+        table.innerHTML += `
+          <tr>
+            <td>${user}</td>
+            <td>${today}</td>
+            <td class="status-present">Present</td>
+          </tr>
+        `;
+      });
+    } else {
+      table.innerHTML = `
+        <tr>
+          <td colspan="3" class="no-data">
+            No attendance marked today
+          </td>
+        </tr>
+      `;
+    }
+  </script>
 
 </body>
 </html>
