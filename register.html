@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f0f0f0;
+      font-family: Arial;
+    }
+    .box {
+      background: #fff;
+      padding: 40px;
+      width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    a {
+      text-decoration: none;
+      color: #4CAF50;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+<div class="box">
+  <h2>User Registration</h2>
+
+  <input id="username" placeholder="Choose Username">
+  <input id="password" type="password" placeholder="Choose Password">
+
+  <button onclick="register()">Register</button>
+
+  <p>Already registered? <a href="login.html">Login</a></p>
+</div>
+
+<script>
+function register() {
+  const u = username.value.trim();
+  const p = password.value.trim();
+
+  if (!u || !p) {
+    alert("All fields required");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  if (users[u]) {
+    alert("Username already exists");
+    return;
+  }
+
+  users[u] = { password: p, role: "user" };
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Registration successful. Please login.");
+  window.location.href = "login.html";
+}
+</script>
+</body>
+</html>
